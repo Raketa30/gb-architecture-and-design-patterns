@@ -4,4 +4,6 @@ public interface Converter {
     void convertToXML();
 
     void convertToCSV();
+
+    void convertToJSON();
 }
