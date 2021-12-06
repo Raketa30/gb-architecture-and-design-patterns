@@ -4,5 +4,4 @@
 #### Тема: Проектирование домашнего CRM приложения
 
 
-https://app.diagrams.net
-
+Для просмотра проекта используйте StarUML: https://staruml.io/ 
