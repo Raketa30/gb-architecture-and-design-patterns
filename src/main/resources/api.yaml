@@ -1,0 +1,96 @@
+openapi: 3.0.0
+info:
+  title: Homework-7
+  description: Employee service
+  version: 1.0.0
+
+tags:
+  - name: Employee
+
+servers:
+  - url: https://localhost:8080
+    description: dev server
+
+paths:
+  /v1/employee:
+    get:
+      description: Information about employees from HR database
+      parameters:
+        - name: bodyLimit
+          in: query
+          description: Amount of employees returned
+          schema:
+            type: integer
+            minimum: 10
+            maximum: 20
+            example: 15
+
+        - name: pageLimit
+          in: query
+          description: Pages to return employees info
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 5
+            example: 2
+
+      responses:
+        200:
+          description: Successful pull of employee info
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  properties:
+                    id:
+                      type: integer
+                      example: 4
+
+                    name:
+                      type: string
+                      example: Igor Kulgachov
+
+                    position:
+                      type: string
+                      example: Manager
+        400:
+          description: bad input parameter
+    post:
+      description: Add new employee
+      responses:
+        201:
+          description: Employee added
+        400:
+          description: 'invalid input, object invalid'
+        409:
+          description: an existing employee already exists
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Employee'
+        description: Inventory item to add
+
+components:
+  schemas:
+    Employee:
+      type: object
+      required:
+        - id
+        - name
+        - position
+      properties:
+        id:
+          type: integer
+          example: 25141
+
+        name:
+          type: string
+          example: Igor Kulgachov
+
+        position:
+          type: string
+          example: Manager
+
+  
